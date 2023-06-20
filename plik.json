@@ -1,0 +1,16 @@
+{
+  "warstwy": [
+    {
+      "funkcja_aktywacji": "none",
+      "liczba_neuronów": 1
+    },
+    {
+      "funkcja_aktywacji": "tanh",
+      "liczba_neuronów": 10     
+    },
+	{
+      "funkcja_aktywacji": "ReLU",
+      "liczba_neuronów": 1      
+    }
+  ]
+}

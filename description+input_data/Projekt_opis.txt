@@ -1,0 +1,78 @@
+WYTYCZNE dotyczace projektu zaliczeniowego z przedmiotu SSN:
+1. Celem projektu jest napisanie skryptu Pythona realizujacego zadania przedstawione w kolejnych punktach w sekcji ZADANIA.
+2. Cały projekt musi byc napisany w jezyku Python (wersja 3.x).
+3. Projekt musi byc przechowywany w repozytorium 'git' przez narzędzie bitbucket:
+https://bitbucket.org/product
+nalezy dodac uzytkownika 'Rafal Kapela (kapraf)' do swojego projektu.
+4. Dla kazdego zadania bedziesz tworzyc nowa galaz kodu i korzystac z narzedzia 'pull-request'.
+5. Projekt bedzie rozliczany etapowo w terminach wyznaczonych przez prowadzacego (patrz czesc zadaniowa).
+6. Implementacja sieci neuronowej w oparciu o analize formatu JSON nie moze korzystac z zadnych innych bibliotek niz te ktore sa wymienione w niniejszym opracowaniu. Pomocnicze biblioteki mogą być użyte np. w przypadku parsowania argumentów programu:
+https://www.askpython.com/python/python-command-line-arguments
+lub do parsowania pliku JSON:
+https://analyticsindiamag.com/how-to-handle-json-data-using-python/
+itp. (ale nie do implementacji jakiejkolwiek części SSN).
+7. Skrypt moze przyjmowac TYLKO dwa argumenty z linii komend:
+python3 projekt.py plik.json dane.txt
+powyzszy sposob wywolania skryptu to JEDYNY sposob w jaki skrypt bedzie wywolywany.
+Jest natomiast wymagane rozdzielenie kodu na pliki trzymajace rozne funkcjonalnosci. Nalezy to rozumiec tak, ze jest jeden glowny plik ktory wywoluje sie zgodnie z powyzszym wymogiem i ktory w srodku posiada komendy 'import' wlaczajace odpowiednie funkcjonalnosci z kolejnych plikow.
+
+
+
+
+
+ZADANIA:
+= I etap (2 tyg.) ======== PLIK funkcje.py, dane.py ================
+1. Zaimplementuj nastepujace funkcje przejscia neuronow jako osobne funkcje pythona:
+ReLU, tanh
+        * 5% -- dodatkowe dwie funkcje aktywacji (ELU, sigmoid)
+2. Dodaj funkcje pomocnicze do obrobki danych uczacych: wysrodkowanie, normalizacja, standaryzacja.
+3. Pobierz dane do nauki sieci i zademonstruj dzialanie funkcji z pkt 1 i 2:
+http://wiki.stat.ucla.edu/socr/index.php/SOCR_Data_Dinov_020108_HeightsWeights
+============================= 20% ==================================
+
+
+= II etap (2 tyg.) ======= PLIK warstwa.py =========================
+4. Zaimplementuj klasę warstwa ktora posiada jako parametr liczbę neuronów i funkcji przejścia (patrz etap I).
+ Wewnatrz musi posiadac funkcje obliczające wyjście warstwy dla danego wejscia oraz gradienty na jej wejsciach majac zadany loss. 
+ Obie funkcje musza korzystac z wczesniej zdefiniowanych funkcji wewnątrz obiektu . Neurony powinny tworzyc tablice obiektow.
+ 
+  forward -- dla zadanych wejść oblicza wartość wyjścia
+    * 30% backward -- propagującą gradient z wyjścia na wejścia neuronu
+  Obie funkcje musza korzystac z wczesniej zdefiniowanych funkcji przejscia.
+============================= 30% ==================================
+
+
+= III etap (1 tydz.) ====== PLIKI siec.py ==========================
+5. Zaimplementuj klasę siec implementujaca prosta siec neuronowa posiadającą tablice warstw. Klasa powinna posiadac funkcje obliczajaca wyjscie przy podanym wejsciu.
+        * 5% -- zaimplementuj sprawdzanie wymiarowosci wejścia oraz liczby neuronów wejsciowych
+        * 10% -- zaimplementuj inicjalizacje sieci z pliku JSON o formacie zgodnym z:
+{
+  "warstwy": [
+    {
+      "funkcja_aktywacji": "<string>",
+      "liczba_neuronów": <int>
+    },
+    {
+      "funkcja_aktywacji": "<string>",
+      "liczba_neuronów": <int>      
+    }
+  ]
+}
+6. Z wczesniej zdefiniowanych klas zdefiniuj prostą sieć jednokierunkową z jednym wejściem, jedną warstwą z 10-cioma neuronami ukrytymi (tanh) oraz jednym neuronem w warstwie wyjściowej (ReLU).
+============================= 30% ==================================
+
+
+= IV etap (1 tydz.) ====== PLIKI tf.py =============================
+7. Zdefiniuj model referencyjny za pomocą biblioteki TensorFlow i Keras zgodny z architektura sieci z poprzedniego etapu.
+8. Zaimplementuj wczytywanie danych do tablicy trenującej i testujacej siec.
+9. Naucz model zdefiniowany za pomoca biblioteki TF
+10. Przekopiuj wagi nauczonego modelu do swojej sieci. Sprawdz czy model dziala tak samo jak model z TF.
+Wagi sa w polu 'weights' kazdej warstwy: np. 'print(model.layers[0].weights)'
+    * 5% Zaimplementuj zaszumienie danych szumem o rozkladzie normalnym
+============================= 20% ==================================
+
+
+Dodatkowe punkty:
+= V etap (2 tyg.) ====== PLIKI nauka_sieci.py ======================
+1. Zaimplementuj algorytm propagacji wstecznej do nauki wlasnej sieci neuronowej.
+============================= +45% ==================================
